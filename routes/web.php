@@ -22,10 +22,13 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-
+Route::middleware(['auth'])->group(function () {
+    Route::get('/tasks', [App\Http\Controllers\TaskController::class, 'index'])->name('task.index');
+    Route::get('/tasks/create', [App\Http\Controllers\TaskController::class, 'create'])->name('task.create');
+    Route::post('/tasks/store', [App\Http\Controllers\TaskController::class, 'store'])->name('task.store');
+    
+});
 //  index page  for tasks
-Route::get('/tasks', [App\Http\Controllers\TaskController::class, 'index'])->name('task.index');
-Route::get('/tasks/create', [App\Http\Controllers\TaskController::class, 'create'])->name('task.create');
-Route::post('/tasks/store', [App\Http\Controllers\TaskController::class, 'store'])->name('task.store');
+
 
 
